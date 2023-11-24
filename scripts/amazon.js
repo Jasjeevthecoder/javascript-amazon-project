@@ -102,8 +102,8 @@ function addToCart(){
                 if(product==cart[i].productId){
                     matchItem = cart[i];
                 }
-
             }
+
             if(matchItem){
                 matchItem.quantity++;
             }else{
@@ -112,7 +112,13 @@ function addToCart(){
                     quantity: 1
                 });
             }
+
+            let cartQuantity=0;
+            for (let i = 0; i < cart.length; i++) {
+                cartQuantity += cart[i].quantity;
+            }
             console.log(cart);
+            document.querySelector('.js-cart-quantity').innerHTML=cartQuantity;
             
         })
         
