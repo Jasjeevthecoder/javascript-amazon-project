@@ -1,3 +1,4 @@
+/*
 const products = [{
     image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
     name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
@@ -22,7 +23,16 @@ const products = [{
         count: 56
     },
     priceCents: 799
+},{
+    image: 'images/products/black-2-slot-toaster.jpg',
+    name: 'Black 2 Slot Toaster',
+    rating: {
+        stars: 5,
+        count: 2197
+    },
+    priceCents: 1899
 }];
+*/
 addProducts();
 function addProducts() {
     let productsHTML = '';
@@ -72,11 +82,39 @@ function addProducts() {
         Added
         </div>
 
-        <button class="add-to-cart-button button-primary">
+        <button class="add-to-cart-button button-primary js-add-to-cart"
+        data-product-id="${products[i].id}">
         Add to Cart
         </button>
         </div>`;
         productsHTML += html;
     }
     document.querySelector('.js-products-grid').innerHTML = productsHTML;
+}
+addToCart();
+function addToCart(){
+    let butt = document.querySelectorAll('.js-add-to-cart');
+    for (let i = 0; i < butt.length; i++) {
+        butt[i].addEventListener('click',()=>{
+            const product = butt[i].dataset.productId;
+            let matchItem;
+            for (let i = 0; i < cart.length; i++) {
+                if(product==cart[i].productId){
+                    matchItem = cart[i];
+                }
+
+            }
+            if(matchItem){
+                matchItem.quantity++;
+            }else{
+                cart.push({
+                    productId: product,
+                    quantity: 1
+                });
+            }
+            console.log(cart);
+            
+        })
+        
+    }
 }
