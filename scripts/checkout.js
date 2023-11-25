@@ -38,7 +38,7 @@ for (let i = 0; i < cart.length; i++) {
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary">
+          <span class="delete-quantity-link link-primary js-delete-link" data-index-id=${i}>
             Delete
           </span>
         </div>
@@ -87,4 +87,14 @@ for (let i = 0; i < cart.length; i++) {
 }
 
 document.querySelector('.js-order-summary').innerHTML=cartSummaryHTML;
+
+let deleteButt = document.querySelectorAll('.js-delete-link');
+for (let i = 0; i < deleteButt.length; i++) {
+  deleteButt[i].addEventListener('click',()=>{
+    let indextId = deleteButt[i].dataset.indextId;
+    cart.splice(indextId,1);
+    
+  })
+  
+}
 
