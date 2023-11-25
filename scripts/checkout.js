@@ -16,7 +16,7 @@ for (let i = 0; i < cart.length; i++) {
     }
 
 
-    cartSummaryHTML += `<div class="cart-item-container">
+    cartSummaryHTML += `<div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -38,7 +38,7 @@ for (let i = 0; i < cart.length; i++) {
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary js-delete-link" data-index-id=${i}>
+          <span class="delete-quantity-link link-primary js-delete-link" data-index-id=${i} data-product-id = ${matchingProduct.id}>
             Delete
           </span>
         </div>
@@ -90,10 +90,14 @@ document.querySelector('.js-order-summary').innerHTML=cartSummaryHTML;
 
 let deleteButt = document.querySelectorAll('.js-delete-link');
 for (let i = 0; i < deleteButt.length; i++) {
+  console.log(cart);
   deleteButt[i].addEventListener('click',()=>{
     let indextId = deleteButt[i].dataset.indextId;
+    let productId = deleteButt[i].dataset.productId;
     cart.splice(indextId,1);
-    
+    console.log(cart);
+    const container = document.querySelector(`.js-cart-item-container-${productId}`);
+    container.remove();
   })
   
 }
